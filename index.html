@@ -100,7 +100,7 @@
   header { padding:44px 0 0; }
   /* PWA 全屏模式:适配刘海屏安全区,顶部内容不被状态栏遮挡(放在基础header之后才能覆盖) */
   @supports (padding: env(safe-area-inset-top)) {
-    header { padding-top: calc(20px + env(safe-area-inset-top)); }
+    header { padding-top: calc(4px + env(safe-area-inset-top)); }
     body { padding-bottom: env(safe-area-inset-bottom); }
   }
   .kicker { font-family:var(--mono); font-size:11px; letter-spacing:.35em; color:var(--green); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
