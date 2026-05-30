@@ -95,14 +95,14 @@
   }
   body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:1; background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.012) 0,rgba(255,255,255,0.012) 1px,transparent 1px,transparent 3px); opacity:.5; }
   .wrap { max-width:1180px; margin:0 auto; padding:0 20px; position:relative; z-index:2; }
-
-  /* header */
-  header { padding:60px 0 0; }
-  /* PWA 全屏模式:适配刘海屏安全区,顶部内容不被状态栏遮挡(放在基础header之后才能覆盖) */
+  /* PWA 全屏模式:适配刘海屏安全区,顶部内容不被状态栏遮挡 */
   @supports (padding: env(safe-area-inset-top)) {
-    header { padding-top: calc(56px + env(safe-area-inset-top)); }
+    header { padding-top: calc(34px + env(safe-area-inset-top)); }
     body { padding-bottom: env(safe-area-inset-bottom); }
   }
+
+  /* header */
+  header { padding:34px 0 0; }
   .kicker { font-family:var(--mono); font-size:11px; letter-spacing:.35em; color:var(--green); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
   .kicker .dot { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 10px var(--green); animation:pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.35;} }
