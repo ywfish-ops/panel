@@ -1,87 +1,38 @@
 <!DOCTYPE html>
-<!--
-============================================================
-  AI 决策面板 · 数据区 / DATA BLOCK
-  给 Claude Code:更新数据时,先改这里的清单作为记录,
-  再到下方对应位置同步修改。会变的数据全部列在这里。
-  分析结论由 claude.ai 提供,Code 只负责落地为代码+部署。
-============================================================
-  更新日期: 2026/05/29
-
-  【温度计状态】🟢 加速期 (ACCELERATING)
-  温度计填充高度: 88%  (搜索"thermo-fill"对应JS height)
-
-  【第一层 需求·四巨头capex 2026】
-    AMZN $200B | GOOGL $185B | MSFT $190B | META $130B
-    合计 ~$725-750B
-  【第二层 验证】
-    DELL backlog $513B (+757% AI服务器)
-    NVDA 数据中心 $75.2B (+92%), 指引$910亿
-    TSM +30% YTD (4月环比-1.1%, 6/10复核)
-  【第三层 情绪】
-    Polymarket泡沫 24% | 10Y 4.50% | FCF收紧
-
-  【筛选结果·各标的现价与判读】(搜索 resp-table 定位表格)
-    CEG  $289  筑底-29%  ⭐建仓候选(逼近第一档$285)
-    PLTR $156  反弹突破   已涨过·等回调
-    GLW  $196  突破      等回调$170
-    MRVL $203  近高      等回调$175
-    GEV  $1070 高位      等深跌
-    RKLB 已清仓($150卖出) 回调重建
-    BE   $294  16倍      过热不碰
-    MU   $900  10倍顶    顶部不碰
-    SNOW $244  RSI94     超买等回调
-    DELL —    暴涨      纯监控
-
-  【等待清单·入场价】(搜索 "当前等待清单" 定位卡片)
-    CEG  第一档$285 / 第二档$260, 止损$235, 目标$340/$380
-    PLTR 第一档$125 / 第二档$115, 止损$100, 目标$160/$200
-    RKLB 回调重建$110 / $95
-
-  【账户状态】富途已清空, 100%现金, 转IBKR途中
-
-  【财报日历】TSM月营收6/10 | CEG 7/30 | RKLB 8/6 |
-              PLTR 8/10 | NVDA 8/26 | DELL 9/3
-============================================================
--->
-<html lang="zh" data-theme="dark" style="color-scheme:dark;background:#0a0e0f;">
+<html lang="zh" data-theme="dark" style="color-scheme:dark;background:#11171a;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>AI 决策面板</title>
-
-<!-- 强制深色:告诉系统本页只支持深色,不做浅色反转 -->
+<title>投资决策面板</title>
 <meta name="color-scheme" content="dark only">
 <meta name="supported-color-schemes" content="dark">
-<meta name="theme-color" content="#0a0e0f">
-
-<!-- iOS 添加到主屏幕:全屏 App 模式 -->
+<meta name="theme-color" content="#11171a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="AI决策">
-
-<!-- 主屏幕图标:内嵌SVG(温度计绿点),无需外部文件 -->
+<meta name="apple-mobile-web-app-title" content="决策面板">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Crect width='180' height='180' rx='40' fill='%230a0e0f'/%3E%3Crect x='78' y='34' width='24' height='86' rx='12' fill='%23243033'/%3E%3Crect x='82' y='60' width='16' height='60' fill='%232ee6a0'/%3E%3Ccircle cx='90' cy='128' r='28' fill='%232ee6a0'/%3E%3C/svg%3E">
-
-<!-- manifest:用 data URI 内嵌,本地文件也能带基本元信息 -->
-<link rel="manifest" href="data:application/json,%7B%22name%22%3A%22AI%E5%86%B3%E7%AD%96%E9%9D%A2%E6%9D%BF%22%2C%22short_name%22%3A%22AI%E5%86%B3%E7%AD%96%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230a0e0f%22%2C%22theme_color%22%3A%22%230a0e0f%22%7D">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Space+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
+html { color-scheme:dark only; background:#11171a; forced-color-adjust:none; -webkit-text-size-adjust:100%; }
+html, body, * { forced-color-adjust:none; }
+body { margin:0; }
+
+/* ===== AI面板样式 ===== */
+
   /* 强制深色:多重锁定,对抗国产App内置浏览器/系统强制反色 */
   html {
     color-scheme: dark only;
-    background: #0a0e0f;
+    background: #11171a;
     forced-color-adjust: none;
     -webkit-text-size-adjust: 100%;
   }
   html, body, * { forced-color-adjust: none; }
   :root { color-scheme: dark only; }
   :root {
-    --bg: #0a0e0f; --panel: #12181a; --panel-2: #161e21; --line: #243033;
+    --bg: #11171a; --panel: #1a2226; --panel-2: #212b30; --line: #2f3d42;
     --green: #2ee6a0; --green-dim: #1a9c6e; --amber: #ffb838; --red: #ff4d5e;
     --ink: #e8f0ee; --ink-dim: #7d908c; --ink-faint: #4a5856;
     --mono: 'Space Mono', monospace; --display: 'Archivo','Noto Sans SC',sans-serif;
@@ -89,7 +40,7 @@
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background:#0a0e0f; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.5;
+    background:#11171a; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.5;
     background-image: radial-gradient(circle at 15% 8%, rgba(46,230,160,0.04), transparent 40%), radial-gradient(circle at 85% 92%, rgba(255,184,56,0.03), transparent 45%);
     min-height:100vh; overflow-x:hidden;
   }
@@ -236,10 +187,51 @@
     .resp-hint { display:block; }
   }
   .resp-hint { display:none; font-family:var(--mono); font-size:10px; color:var(--ink-faint); margin-bottom:10px; letter-spacing:.05em; }
+
+
+/* ===== 物理AI样式(作用域隔离 #phy-scope)===== */
+#phy-scope{ color-scheme:dark only; background:#16130f; forced-color-adjust:none; -webkit-text-size-adjust:100%; }#phy-scope, #phy-scope, #phy-scope{ forced-color-adjust:none; }#phy-scope{
+    --bg:#16130f; --panel:#201b15; --panel-2:#28221a; --line:#3f3527;
+    --amber:#ffb838; --amber-dim:#b87d1a; --green:#2ee6a0; --red:#ff4d5e; --blue:#5b9dff;
+    --ink:#f0ebe2; --ink-dim:#94897a; --ink-faint:#5a5246;
+    --mono:'Space Mono',monospace; --display:'Archivo','Noto Sans SC',sans-serif;
+    --body:'Noto Sans SC','Archivo',sans-serif;
+  }#phy-scope{ margin:0; padding:0; box-sizing:border-box; }#phy-scope{
+    background:#16130f; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.5;
+    background-image: radial-gradient(circle at 15% 8%, rgba(255,184,56,0.05), transparent 40%), radial-gradient(circle at 85% 92%, rgba(91,157,255,0.03), transparent 45%);
+    min-height:100vh; overflow-x:hidden;
+  }#phy-scope body::before{ content:""; position:fixed; inset:0; pointer-events:none; z-index:1; background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.01) 0,rgba(255,255,255,0.01) 1px,transparent 1px,transparent 3px); opacity:.5; }#phy-scope .wrap{ max-width:1180px; margin:0 auto; padding:0 20px; position:relative; z-index:2; }#phy-scope header{ padding:44px 0 0; }@supports (padding: env(safe-area-inset-top)){#phy-scope header{ padding-top: calc(4px + env(safe-area-inset-top)); }#phy-scope{ padding-bottom: env(safe-area-inset-bottom); }}#phy-scope .kicker{ font-family:var(--mono); font-size:11px; letter-spacing:.35em; color:var(--amber); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:10px; }#phy-scope .kicker .dot{ width:8px; height:8px; border-radius:50%; background:var(--amber); box-shadow:0 0 10px var(--amber); animation:pulse 2.4s infinite; }@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }#phy-scope h1{ font-family:var(--display); font-weight:900; font-size:clamp(2.2rem,6vw,4rem); line-height:.95; letter-spacing:-.03em; text-transform:uppercase; }#phy-scope h1 .hl{ color:var(--amber); }#phy-scope .sub{ margin-top:14px; max-width:680px; color:var(--ink-dim); font-size:14px; }#phy-scope .sub b{ color:var(--ink); }#phy-scope .updated{ margin-top:14px; font-family:var(--mono); font-size:12px; color:var(--ink-faint); }#phy-scope .xlink{ margin-top:10px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); }#phy-scope .xlink b{ color:var(--amber-dim); }#phy-scope .tabs{ display:flex; gap:2px; margin:26px 0 0; border-bottom:1px solid var(--line); }#phy-scope .tab{ flex:1 1 0; min-width:0; font-family:var(--display); font-weight:800; font-size:.82rem; text-transform:uppercase; color:var(--ink-faint); background:none; border:none; padding:13px 4px; cursor:pointer; border-bottom:2px solid transparent; transition:.2s; white-space:nowrap; text-align:center; }#phy-scope .tab.active{ color:var(--amber); border-bottom-color:var(--amber); }#phy-scope .panel-view{ display:none; padding:30px 0 0; animation:fade .4s; }#phy-scope .panel-view.active{ display:block; }@keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }#phy-scope /* verdict */
+  .verdict{ background:var(--panel); border:1px solid var(--line); border-radius:4px; display:grid; grid-template-columns:auto 1fr; overflow:hidden; margin-bottom:28px; }#phy-scope .gauge-cell{ padding:30px 30px; border-right:1px solid var(--line); display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(160deg,rgba(255,184,56,0.06),transparent); min-width:220px; }#phy-scope .thermometer{ width:54px; height:180px; position:relative; margin:8px 0 18px; }#phy-scope .thermo-tube{ position:absolute; left:50%; top:0; transform:translateX(-50%); width:20px; height:148px; background:var(--panel-2); border:2px solid var(--line); border-radius:12px 12px 0 0; overflow:hidden; }#phy-scope .thermo-fill{ position:absolute; bottom:0; left:0; width:100%; background:linear-gradient(0deg,var(--amber-dim),var(--amber)); height:0; transition:height 1.8s cubic-bezier(.2,.8,.2,1); }#phy-scope .thermo-bulb{ position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:44px; height:44px; border-radius:50%; background:linear-gradient(160deg,var(--amber),var(--amber-dim)); border:2px solid var(--line); box-shadow:0 0 24px rgba(255,184,56,.45); }#phy-scope .verdict-status{ font-family:var(--display); font-weight:900; font-size:1.6rem; text-transform:uppercase; color:var(--amber); text-align:center; }#phy-scope .verdict-status small{ display:block; font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--ink-dim); font-weight:400; margin-top:6px; }#phy-scope .verdict-body{ padding:28px 30px; display:flex; flex-direction:column; justify-content:center; }#phy-scope .verdict-body h2{ font-family:var(--display); font-size:1.05rem; font-weight:800; text-transform:uppercase; margin-bottom:14px; }#phy-scope .verdict-body p{ color:var(--ink-dim); font-size:14px; margin-bottom:10px; }#phy-scope .verdict-body p b{ color:var(--amber); }#phy-scope .scale{ margin-top:14px; display:flex; border-radius:3px; overflow:hidden; border:1px solid var(--line); }#phy-scope .scale div{ flex:1; padding:8px 6px; text-align:center; font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--ink-faint); text-transform:uppercase; }#phy-scope .scale .s-on{ background:rgba(255,184,56,.15); color:var(--amber); border-bottom:2px solid var(--amber); font-weight:700; }#phy-scope .premise{ background:var(--panel-2); border:1px dashed var(--line); border-radius:4px; padding:18px 22px; margin-bottom:28px; }#phy-scope .premise h4{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--amber-dim); text-transform:uppercase; margin-bottom:10px; }#phy-scope .premise p{ font-size:13.5px; color:var(--ink-dim); }#phy-scope .premise p b{ color:var(--ink); }#phy-scope .layer{ margin:34px 0; }#phy-scope .layer-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:4px; }#phy-scope .layer-num{ font-family:var(--mono); font-size:13px; color:var(--bg); background:var(--red); padding:2px 10px; border-radius:2px; font-weight:700; }#phy-scope .layer-head.b2 .layer-num{background:var(--amber);}#phy-scope .layer-head.b3 .layer-num{background:var(--amber-dim);}#phy-scope .layer-title{ font-family:var(--display); font-size:1.4rem; font-weight:800; text-transform:uppercase; }#phy-scope .layer-tag{ margin-left:auto; font-family:var(--mono); font-size:10px; color:var(--red); border:1px solid var(--line); padding:3px 9px; border-radius:2px; }#phy-scope .layer-desc{ color:var(--ink-faint); font-size:12px; margin:6px 0 18px; font-family:var(--mono); }#phy-scope .grid{ display:grid; gap:13px; }#phy-scope .grid-3{ grid-template-columns:repeat(3,1fr); }#phy-scope .card{ background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:18px; position:relative; overflow:hidden; transition:.25s; }#phy-scope .card:hover{ transform:translateY(-3px); border-color:var(--amber-dim); }#phy-scope .card::after{ content:""; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--ink-faint); }#phy-scope .card.investable::after{ background:var(--green); }#phy-scope .card.partial::after{ background:var(--amber); }#phy-scope .card.noaccess::after{ background:var(--red); }#phy-scope .card.oversea::after{ background:var(--blue); }#phy-scope .card.unlisted::after{ background:var(--ink-faint); }#phy-scope .card-ticker{ font-family:var(--mono); font-size:12px; color:var(--ink-dim); letter-spacing:.1em; display:flex; justify-content:space-between; align-items:center; }#phy-scope .card-name{ font-size:12px; color:var(--ink-faint); margin-top:2px; min-height:16px; }#phy-scope .card-val{ font-family:var(--display); font-weight:900; font-size:1.5rem; margin:10px 0 2px; letter-spacing:-.02em; }#phy-scope .card-tag{ font-family:var(--mono); font-size:10px; font-weight:700; padding:2px 7px; border-radius:2px; display:inline-block; margin-top:4px; }#phy-scope .tag-inv{ background:rgba(46,230,160,.15); color:var(--green); }#phy-scope .tag-par{ background:rgba(255,184,56,.12); color:var(--amber); }#phy-scope .tag-no{ background:rgba(255,77,94,.12); color:var(--red); }#phy-scope .tag-os{ background:rgba(91,157,255,.12); color:var(--blue); }#phy-scope .tag-un{ background:rgba(90,82,70,.3); color:var(--ink-faint); }#phy-scope .card-note{ font-size:11px; color:var(--ink-faint); margin-top:9px; line-height:1.4; border-top:1px solid var(--line); padding-top:9px; }#phy-scope .bottleneck{ display:flex; flex-direction:column; gap:10px; }#phy-scope .bn{ background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:18px 22px; display:flex; align-items:flex-start; gap:18px; }#phy-scope .bn-depth{ font-family:var(--display); font-weight:900; font-size:1.4rem; min-width:60px; }#phy-scope .bn.d1 .bn-depth{color:var(--red);}#phy-scope .bn.d2 .bn-depth{color:var(--amber);}#phy-scope .bn.d3 .bn-depth{color:var(--amber-dim);}#phy-scope .bn-body h3{ font-family:var(--display); font-size:1.05rem; font-weight:800; margin-bottom:4px; }#phy-scope .bn-body p{ font-size:13px; color:var(--ink-dim); }#phy-scope .bn-body p b{ color:var(--ink); }#phy-scope .bn-deep{ margin-left:auto; font-family:var(--mono); font-size:9px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.1em; white-space:nowrap; }#phy-scope .signal{ margin-top:18px; background:var(--panel-2); border:1px dashed var(--line); border-radius:4px; padding:16px 20px; }#phy-scope .signal h4{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--ink-dim); text-transform:uppercase; margin-bottom:10px; }#phy-scope .signal ul{ list-style:none; }#phy-scope .signal li{ font-size:13px; color:var(--ink-dim); padding:5px 0 5px 22px; position:relative; }#phy-scope .signal li::before{ position:absolute; left:0; top:5px; font-family:var(--mono); }#phy-scope .signal li.good::before{content:"✓"; color:var(--green);}#phy-scope .signal li.warn::before{content:"⚠"; color:var(--amber);}#phy-scope .signal li.bad::before{content:"✕"; color:var(--red);}#phy-scope .signal li.star::before{content:"★"; color:var(--amber);}#phy-scope .signal li b{ color:var(--ink); }#phy-scope .cross{ background:linear-gradient(135deg,rgba(255,184,56,0.08),rgba(46,230,160,0.05)); border:1px solid var(--amber-dim); border-radius:4px; padding:24px; margin:28px 0; }#phy-scope .cross h3{ font-family:var(--display); font-size:1.2rem; font-weight:900; text-transform:uppercase; color:var(--amber); margin-bottom:12px; }#phy-scope .cross p{ font-size:13.5px; color:var(--ink-dim); margin-bottom:8px; }#phy-scope .cross p b{ color:var(--ink); }#phy-scope .cross-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px; }#phy-scope .cross-cell{ background:var(--panel); border:1px solid var(--line); border-radius:3px; padding:10px; text-align:center; }#phy-scope .cross-cell .k{ font-family:var(--mono); font-size:9px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; }#phy-scope .cross-cell .v{ font-size:12px; color:var(--green); font-weight:700; margin-top:4px; }#phy-scope .section-rule{ font-family:var(--mono); font-size:11px; letter-spacing:.3em; color:var(--ink-faint); text-transform:uppercase; margin:34px 0 20px; display:flex; align-items:center; gap:14px; }#phy-scope .section-rule::after{ content:""; flex:1; height:1px; background:var(--line); }#phy-scope footer{ border-top:1px solid var(--line); margin-top:38px; padding:26px 0 50px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); line-height:1.8; }#phy-scope footer b{ color:var(--ink-dim); }@media (max-width:900px){#phy-scope .grid-3{grid-template-columns:repeat(2,1fr);}#phy-scope .verdict{grid-template-columns:1fr;}#phy-scope .gauge-cell{border-right:none; border-bottom:1px solid var(--line);}#phy-scope .cross-grid{grid-template-columns:repeat(2,1fr);}}@media (max-width:560px){#phy-scope .grid-3{grid-template-columns:1fr;}#phy-scope .bn{flex-wrap:wrap; gap:10px;}#phy-scope .bn-deep{margin-left:0;}}
+  /* ===== 整合外层:底部TabBar ===== */
+  body { padding-bottom:72px !important; }
+  @supports (padding: env(safe-area-inset-bottom)) {
+    body { padding-bottom:calc(72px + env(safe-area-inset-bottom)) !important; }
+  }
+  .theme-section { display:none; }
+  .theme-section.active { display:block; }
+  #tabbar {
+    position:fixed; left:0; right:0; bottom:0; z-index:100;
+    display:flex; background:rgba(17,23,26,0.92); -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+    border-top:1px solid #2f3d42; padding-bottom:env(safe-area-inset-bottom);
+  }
+  #tabbar button {
+    flex:1; background:none; border:none; padding:12px 4px 10px; cursor:pointer;
+    font-family:'Noto Sans SC',sans-serif; font-size:11px; font-weight:700;
+    color:#5a5246; display:flex; flex-direction:column; align-items:center; gap:4px;
+    transition:.2s; letter-spacing:.05em;
+  }
+  #tabbar button .ic { font-size:20px; line-height:1; }
+  #tabbar button.active[data-theme-btn="ai"] { color:#2ee6a0; }
+  #tabbar button.active[data-theme-btn="phy"] { color:#ffb838; }
+  #tabbar button:not(.active) { opacity:.6; }
+
 </style>
 </head>
 <body>
+
+<div class="theme-section active" id="sec-ai">
 <div class="wrap">
+
 
   <header>
     <div class="kicker"><span class="dot"></span>AI 主题投资决策系统</div>
@@ -268,7 +260,7 @@
       <div class="verdict-body">
         <h2>主题总开关 · 2026年5月</h2>
         <p>三层信号一致指向<b>加速</b>:超大规模厂商 2026 capex ~<b>$725–750B</b>(+67~77%),Dell backlog <b>$513B</b>、NVDA 数据中心 +92%,泡沫情绪仍低位。</p>
-        <p style="color:var(--ink-faint); font-size:13px;">用法:🟢时正常按漏斗筛选AI链标的;🟡转向收紧只留最强;🔴整个AI主题降暴露。唯一黄点:TSM 4月环比 -1.1%,6/10复核。</p>
+        <p style="color:var(--ink-faint); font-size:13px;">用法:🟢时正常按漏斗筛选AI链标的;🟡转向收紧只留最强;🔴整个AI主题降暴露。唯一黄点:TSM 4月环比 -1.1%,6/10复核。<br>5/30更新:NVIDIA Vera Rubin 平台落地(Dell XE9812 达3.6 exaflops/220kW机架),进一步印证加速,功率密度爆炸强化液冷/电力瓶颈逻辑。</p>
         <div class="scale">
           <div class="s-green">🟢 加速 持有</div><div class="s-amber">🟡 见顶 减仓</div><div class="s-red">🔴 退潮 撤出</div>
         </div>
@@ -301,6 +293,8 @@
         <ul>
           <li class="good">Dell $513B + NVDA DC+92% + TSM+30% = 需求<b>真实且加速</b></li>
           <li class="good">NVDA <b>网络收入+199%</b> = 直接验证光通信/连接主题</li>
+          <li class="good">NVIDIA <b>Vera Rubin</b> 平台落地:Dell 旗舰 XE9812 达 3.6 exaflops,2026下半年上市 = capex继续加速新证据</li>
+          <li class="good">Vera Rubin 机架 <b>220kW</b>(传统15-40倍)+ Spectrum-6 带 1.6T/CPO = 验证液冷/电力/光通信瓶颈层需求</li>
           <li class="warn">TSM 4月<b>环比-1.1%</b> = 唯一细微降温,6/10复核是否延续</li>
         </ul>
       </div>
@@ -523,24 +517,274 @@
     三件套:温度计(主题开关)+ 筛选漏斗(决策逻辑)+ 产业链清单(候选池)。<br>
     数据为公开报道整理,非实时。本面板为个人研究工具,不构成投资建议。AI主题股波动显著高于大盘,严守纪律:不追历史新高±10%、买入即挂OCO、单股第一笔≤10%、守在能力圈。
   </footer>
+</div>
+</div>
 
+<div class="theme-section" id="sec-phy">
+<div id="phy-scope"><div class="wrap">
+
+
+  <header>
+    <div class="kicker"><span class="dot"></span>具身智能 · PHYSICAL AI</div>
+    <h1>物理AI<span class="hl">决策面板</span></h1>
+    <p class="sub">独立于 AI 主题面板。这里跟踪人形机器人产业链——但<b>定性是"观察期",不是布局期</b>。商业化在 2027-2030,美股纯玩标的稀缺。面板的作用是:把这个远期主题里<b>唯一现在就成立的交叉点</b>标出来,其余监控。</p>
+    <div class="updated">// 数据更新: 2026/05/30 · 个人研究工具,非投资建议</div>
+    <div class="xlink">// 配套:AI 主题决策面板(绿色)主管数据中心/光通信/能源;本面板(<b>琥珀色</b>)主管物理AI</div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="phy-thermo">🌡️ 温度</button>
+    <button class="tab" data-tab="phy-bottleneck">⛓️ 瓶颈</button>
+    <button class="tab" data-tab="phy-stocks">📍 产业链</button>
+    <button class="tab" data-tab="phy-funnel">🔻 漏斗</button>
+    <button class="tab" data-tab="phy-cross">⭐ 交叉点</button>
+  </div>
+
+  <!-- TAB 1: 温度计 -->
+  <div class="panel-view active" id="phy-thermo">
+    <div class="verdict">
+      <div class="gauge-cell">
+        <div class="thermometer">
+          <div class="thermo-tube"><div class="thermo-fill" id="phy-fill"></div></div>
+          <div class="thermo-bulb"></div>
+        </div>
+        <div class="verdict-status">观察期<small>WATCHING</small></div>
+      </div>
+      <div class="verdict-body">
+        <h2>主题判读 · 2026年5月</h2>
+        <p>有真实进展(特斯拉转产 Optimus),但<b>目标 ≠ 已兑现收入</b>。整机商业化 2027-2030,美股能直接买的瓶颈标的极少。</p>
+        <p style="color:var(--ink-faint); font-size:13px;">用资金效率三问:①商业化时间——整机太远 ②锁仓期长 ③机会成本高。结论:<b>整机维持监控不买</b>,只有一个交叉点(稀土磁材)现在就成立——见"交叉点"页。</p>
+        <div class="scale">
+          <div>🔵 太早 不碰</div>
+          <div class="s-on">🟡 观察 监控</div>
+          <div>🟢 布局 可入</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="premise">
+      <h4>改变格局的前提 · 2026/01/28</h4>
+      <p>特斯拉宣布<b>停产 Model S/X</b>,Fremont 工厂改造生产 Optimus Gen3,目标年产 100 万台、单台 $20K,2026 capex 翻倍至 $200 亿。Giga Texas 在建年产能 1000 万台工厂。<b>这是真信号,但"目标产能"和"已兑现收入"之间通常差很远</b>——别把规划当现实。</p>
+    </div>
+
+    <div class="signal">
+      <h4>为什么是观察期而非布局期</h4>
+      <ul>
+        <li class="bad">整机商业化在 <b>2027-2030</b>,中小账户锁仓成本太高</li>
+        <li class="good">最硬的瓶颈(减速器/丝杠/电机)龙头在<b>A股,你的账户直接可买</b>(科创板标的需确认权限)</li>
+        <li class="warn">软件/具身智能模型的"GPT时刻"未到,是真正的深层瓶颈</li>
+        <li class="star">资金效率最高的切入:稀土磁材(MP/USAR,美股)——见交叉点页</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 2: 瓶颈 -->
+  <div class="panel-view" id="phy-bottleneck">
+    <p class="sub" style="margin-bottom:20px;">用"卖铲子/找瓶颈"框架:瓶颈环节 = 定价权环节。从最深(最不可替代)到表层。</p>
+    <div class="bottleneck">
+      <div class="bn d1">
+        <div class="bn-depth">01</div>
+        <div class="bn-body">
+          <h3>稀土永磁 NdFeB <span style="color:var(--red); font-size:.8rem;">最深瓶颈</span></h3>
+          <p>每个关节电机都依赖 NdFeB 永磁体。<b>中国控制 69% 开采 + 90% 加工提炼</b>,出口许可变化已带来波动。整个产业链定价权最强的一环。</p>
+        </div>
+        <div class="bn-deep">不可替代</div>
+      </div>
+      <div class="bn d2">
+        <div class="bn-depth">02</div>
+        <div class="bn-body">
+          <h3>精密传动 减速器/丝杠</h3>
+          <p>行星滚柱丝杠瓶颈最尖锐(窄供应商、长交期、难替代);谐波减速器次之。<b>占执行器成本 30-50%</b>,是单台机器人最贵的机械部件。</p>
+        </div>
+        <div class="bn-deep">供应商集中</div>
+      </div>
+      <div class="bn d3">
+        <div class="bn-depth">03</div>
+        <div class="bn-body">
+          <h3>灵巧手 Dexterous Hand</h3>
+          <p><b>占 BOM 31%,最大的单一成本部件</b>。多指灵巧操作的可靠性与成本是量产前必须跨过的门槛之一。</p>
+        </div>
+        <div class="bn-deep">最贵单件</div>
+      </div>
+    </div>
+    <div class="signal">
+      <h4>瓶颈判读</h4>
+      <ul>
+        <li class="star">稀土磁材是<b>最深瓶颈 + 美股纯玩</b>的切入点</li>
+        <li class="good">减速器龙头:双环传动(A股可买);绿的谐波(科创板需权限);Harmonic Drive(日股走IBKR)</li>
+        <li class="warn">灵巧手仍在降本曲线早期,无成熟美股纯玩</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 3: 标的 -->
+  <div class="panel-view" id="phy-stocks">
+    <p class="sub" style="margin-bottom:14px;">按产业链层级的<b>全球</b>龙头。颜色 = 上市地:<span style="color:var(--green)">绿=美股</span> / <span style="color:var(--amber)">黄=美股(跨主题/沾边)</span> / <span style="color:var(--blue)">蓝=A股(你的A股账户直接可买)/日股(IBKR)</span> / <span style="color:var(--ink-faint)">灰=未上市</span>。你有A股账户,A股标的直接可买;日股走IBKR;科创板(688开头)需确认权限。</p>
+
+    <div class="layer"><div class="layer-head b3"><span class="layer-num" style="background:var(--red)">①</span><span class="layer-title" style="font-size:1.1rem">稀土磁材</span><span class="layer-tag">最深瓶颈</span></div>
+    <div class="grid grid-3">
+      <div class="card investable"><div class="card-ticker">MP</div><div class="card-name">美国稀土龙头</div><div class="card-val">MP Materials</div><div class="card-tag tag-inv">美股 · 已盈利</div><div class="card-note">市值$143亿;EV/风电/国防已有需求</div></div>
+      <div class="card investable"><div class="card-ticker">USAR</div><div class="card-name">mine-to-magnet</div><div class="card-val">USA Rare Earth</div><div class="card-tag tag-inv">美股 · 爬坡期</div><div class="card-note">Q2交付NdFeB,政府支持,故事股</div></div>
+      <div class="card oversea"><div class="card-ticker">300748</div><div class="card-name">磁材</div><div class="card-val">金力永磁</div><div class="card-tag tag-os">A股·可买</div><div class="card-note">国产钕铁硼磁材龙头</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head b2"><span class="layer-num" style="background:var(--amber)">②</span><span class="layer-title" style="font-size:1.1rem">减速器</span><span class="layer-tag">占BOM 35%+</span></div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">688017</div><div class="card-name">谐波减速器</div><div class="card-val">绿的谐波</div><div class="card-tag tag-os">科创板·需开权限·特斯拉链</div><div class="card-note">谐波减速器绝对龙头,特斯拉供应商</div></div>
+      <div class="card oversea"><div class="card-ticker">6324</div><div class="card-name">谐波减速器</div><div class="card-val">Harmonic Drive</div><div class="card-tag tag-os">日股·IBKR直连</div><div class="card-note">哈默纳科,全球谐波减速器原垄断者</div></div>
+      <div class="card oversea"><div class="card-ticker">002472</div><div class="card-name">RV减速器</div><div class="card-val">双环传动</div><div class="card-tag tag-os">A股·可买</div><div class="card-note">RV减速器国产突破</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head b2"><span class="layer-num" style="background:var(--amber)">③</span><span class="layer-title" style="font-size:1.1rem">丝杠/轴承</span><span class="layer-tag">瓶颈最尖锐</span></div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">SKF</div><div class="card-name">滚柱丝杠/轴承</div><div class="card-val">SKF</div><div class="card-tag tag-os">瑞典/ADR·可触达</div><div class="card-note">行星滚柱丝杠专业制造商</div></div>
+      <div class="card oversea"><div class="card-ticker">300660</div><div class="card-name">微型丝杠</div><div class="card-val">江苏雷利/鼎智</div><div class="card-tag tag-os">A股·可买</div><div class="card-note">微型线性传动龙头,滚柱丝杠</div></div>
+      <div class="card oversea"><div class="card-ticker">603667</div><div class="card-name">丝杠</div><div class="card-val">五洲新春</div><div class="card-tag tag-os">A股·可买</div><div class="card-note">丝杠+轴承布局</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head b3"><span class="layer-num" style="background:var(--amber-dim)">④</span><span class="layer-title" style="font-size:1.1rem">电机/执行器</span></div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">300124</div><div class="card-name">伺服系统</div><div class="card-val">汇川技术</div><div class="card-tag tag-os">A股·可买</div><div class="card-note">伺服龙头,关节伺服领先</div></div>
+      <div class="card oversea"><div class="card-ticker">601689</div><div class="card-name">总成/执行器</div><div class="card-val">拓普集团</div><div class="card-tag tag-os">A股·可买·特斯拉链</div><div class="card-note">机器人电驱执行器,与客户同步研发</div></div>
+      <div class="card oversea"><div class="card-ticker">002747</div><div class="card-name">微型电机</div><div class="card-val">兆威机电</div><div class="card-tag tag-os">A股·可买</div><div class="card-note">灵巧手微型驱动</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head b3"><span class="layer-num" style="background:var(--amber-dim)">⑤</span><span class="layer-title" style="font-size:1.1rem">感知 / 大脑 / 整机</span></div>
+    <div class="grid grid-3">
+      <div class="card partial"><div class="card-ticker">NVDA</div><div class="card-name">大脑/平台</div><div class="card-val">Nvidia Isaac</div><div class="card-tag tag-par">美股 · 跨主题</div><div class="card-note">已在AI面板,不重复押注</div></div>
+      <div class="card partial"><div class="card-ticker">TSLA</div><div class="card-name">整机</div><div class="card-val">Tesla Optimus</div><div class="card-tag tag-par">美股 · 占比小</div><div class="card-note">机器人占TSLA估值比例小</div></div>
+      <div class="card partial"><div class="card-ticker">OUST</div><div class="card-name">感知LiDAR</div><div class="card-val">Ouster</div><div class="card-tag tag-par">美股 · 小盘</div><div class="card-note">工业LiDAR,波动大</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head b3"><span class="layer-num" style="background:var(--ink-faint)">⑥</span><span class="layer-title" style="font-size:1.1rem">整机·国产</span><span class="layer-tag" style="color:var(--ink-faint)">IPO潮</span></div>
+    <div class="grid grid-3">
+      <div class="card unlisted"><div class="card-ticker">宇树</div><div class="card-name">四足/人形</div><div class="card-val">宇树科技</div><div class="card-tag tag-un">未上市·辅导中(关注IPO)</div><div class="card-note">四足全球70%份额,全栈自研</div></div>
+      <div class="card unlisted"><div class="card-ticker">智元</div><div class="card-name">人形整机</div><div class="card-val">智元机器人</div><div class="card-tag tag-un">未上市·股改(关注IPO)</div><div class="card-note">千台级下线,数亿营收</div></div>
+      <div class="card unlisted"><div class="card-ticker">Figure</div><div class="card-name">人形整机</div><div class="card-val">Figure AI</div><div class="card-tag tag-un">未上市(关注IPO)</div><div class="card-note">美国人形整机明星,未IPO</div></div>
+    </div></div>
+
+    <div class="signal">
+      <h4>完整产业链看清后的判读(基于你的账户)</h4>
+      <ul>
+        <li class="good">最硬的瓶颈层龙头在A股(汇川/拓普/双环/兆威等)——<b>你的A股账户直接可买</b>,这是你相比纯美股玩家的优势</li>
+        <li class="warn">绿的谐波(688017)是<b>科创板</b>,需确认是否开通科创板权限(50万+2年门槛)</li>
+        <li class="good">Harmonic Drive(日股)走IBKR;稀土MP/USAR是美股</li>
+        <li class="star">你能同时覆盖美股(稀土)+ A股(传动/电机)两条通道——<b>物理AI对你不是"看戏",是真能参与</b>,但仍要过资金效率三问和位置判断</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB: 筛选漏斗 -->
+  <div class="panel-view" id="phy-funnel">
+    <p class="sub" style="margin-bottom:14px;">和 AI 主题面板同一套 6 道闸,但物理AI整体在观察期,<b>大多数标的会被前几道闸拦下</b>。漏斗在这里的作用是:解释为什么现在多数不该买,以及万一要碰该怎么过闸。</p>
+
+    <div class="bottleneck" style="gap:10px;">
+      <div class="bn" style="border-left:3px solid var(--red);"><div class="bn-depth" style="color:var(--red); font-size:1.1rem; min-width:42px;">1</div><div class="bn-body"><h3 style="font-size:.95rem;">温度计 · 观察期🟡</h3><p>物理AI主题处于观察期而非加速期。<b>这道闸本身就给整个主题降权</b>——不是不能碰,是默认仓位要更小、更挑。</p></div><div class="bn-deep">降权</div></div>
+      <div class="bn" style="border-left:3px solid var(--red);"><div class="bn-depth" style="color:var(--red); font-size:1.1rem; min-width:42px;">2</div><div class="bn-body"><h3 style="font-size:.95rem;">资金效率三问 · 多数不过</h3><p>整机/灵巧手商业化2027-2030,<b>锁仓太久</b>→不过。只有稀土"收入已兑现"能过这道闸。</p></div><div class="bn-deep">关键闸</div></div>
+      <div class="bn" style="border-left:3px solid var(--amber);"><div class="bn-depth" style="color:var(--amber); font-size:1.1rem; min-width:42px;">3</div><div class="bn-body"><h3 style="font-size:.95rem;">卖铲子 · 优先瓶颈层</h3><p>稀土(最深瓶颈)>减速器/电机>整机。优先上游,避开整机的技术路线风险。</p></div><div class="bn-deep">排序</div></div>
+      <div class="bn" style="border-left:3px solid var(--amber);"><div class="bn-depth" style="color:var(--amber); font-size:1.1rem; min-width:42px;">4</div><div class="bn-body"><h3 style="font-size:.95rem;">四阶段 · 看位置</h3><p>A股传动板块2025已炒过(一季涨51%、二季回调20%),稀土也炒过一波。<b>多在第三阶段,需等回调</b>。</p></div><div class="bn-deep">砍最狠</div></div>
+      <div class="bn" style="border-left:3px solid var(--amber-dim);"><div class="bn-depth" style="color:var(--amber-dim); font-size:1.1rem; min-width:42px;">5</div><div class="bn-body"><h3 style="font-size:.95rem;">小账户友好</h3><p>A股标的有汇率+信息差成本;USAR是小盘故事股。<b>跨市场分散精力也是隐性成本</b>。</p></div><div class="bn-deep">摩擦</div></div>
+      <div class="bn" style="border-left:3px solid var(--red);"><div class="bn-depth" style="color:var(--red); font-size:1.1rem; min-width:42px;">6</div><div class="bn-body"><h3 style="font-size:.95rem;">能力圈 · 这是新主题</h3><p>物理AI不在你已验证的5大主题内,是<b>扩圈尝试</b>。扩圈本身没错,但要用最小仓位试,不能当主力。</p></div><div class="bn-deep">扩圈</div></div>
+    </div>
+
+    <div class="signal">
+      <h4>跑完漏斗的结果(2026/05/30)</h4>
+      <ul>
+        <li class="bad">整机(TSLA纯押/宇树/智元):资金效率闸不过 → <b>不碰/等IPO观察</b></li>
+        <li class="bad">减速器/电机(A股):虽可买,但位置偏高+扩圈+信息差 → <b>观察,不急</b></li>
+        <li class="star">稀土(MP/USAR):唯一过了"资金效率"闸的 → <b>升级到研究,但需查是否过热</b></li>
+        <li class="warn">结论:物理AI当前<b>0个直接建仓,1个(稀土)值得深研</b>,其余监控</li>
+      </ul>
+    </div>
+
+    <div class="signal" style="border-color:var(--amber-dim);">
+      <h4>这个漏斗对你的真正价值</h4>
+      <ul>
+        <li class="warn">它防止你因为"物理AI很火 + 我A股也能买"就冲动入场</li>
+        <li class="good">能买 ≠ 该买:通道变宽了,但6道闸的标准没松</li>
+        <li class="star">它把一个热门大主题,诚实收敛成"<b>就盯稀土一个,其余看戏</b>"</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 4: 交叉点 -->
+  <div class="panel-view" id="phy-cross">
+    <div class="cross">
+      <h3>⭐ 唯一现在就成立的交叉点:稀土磁材</h3>
+      <p>这次全景研究最有价值的发现:物理AI整机要等2030,但<b>稀土磁材现在就成立</b>——因为它<b>不依赖机器人量产</b>就有需求(EV电机、风电、国防),机器人只是额外的上行期权。</p>
+      <p>这把"等2030的远期故事",变成了"<b>现在就有收入 + 机器人是免费看涨期权</b>"的近期标的。资金效率远高于赌整机。</p>
+      <div class="cross-grid">
+        <div class="cross-cell"><div class="k">真瓶颈</div><div class="v">✓ 90%加工在中国</div></div>
+        <div class="cross-cell"><div class="k">美股可投</div><div class="v">✓ MP/USAR</div></div>
+        <div class="cross-cell"><div class="k">商业化</div><div class="v">✓ 已兑现</div></div>
+        <div class="cross-cell"><div class="k">政策催化</div><div class="v">✓ 去中国化</div></div>
+      </div>
+    </div>
+
+    <div class="signal">
+      <h4>资金效率三问 · 稀土磁材 vs 整机</h4>
+      <ul>
+        <li class="good">商业化时间:整机2027-2030 ✕ &nbsp;|&nbsp; 稀土<b>已兑现</b>(现有EV/风电/国防需求)✓</li>
+        <li class="good">锁仓期:整机长 ✕ &nbsp;|&nbsp; 稀土短(有现有市场支撑)✓</li>
+        <li class="good">机会成本:稀土跨界受益,不押单一主题成败</li>
+      </ul>
+    </div>
+
+    <div class="signal" style="border-color:var(--amber-dim);">
+      <h4>⚠️ 入场前必查(别急)</h4>
+      <ul>
+        <li class="warn">稀土板块2025已因"去中国化"炒过一波,<b>查当前位置是否过热</b></li>
+        <li class="warn">MP vs USAR:MP已盈利成熟、USAR是产能爬坡期故事股,风险档位不同</li>
+        <li class="bad">USAR是小盘+爬坡期,符合你"故事股"警戒,需更严止损</li>
+        <li class="star">下一步:深挖 MP vs USAR 当前位置/估值/谁更适合小账户</li>
+      </ul>
+    </div>
+
+    <div class="section-rule">与主面板的分工</div>
+    <p class="sub">稀土磁材其实<b>同时出现在两个面板</b>:在 AI 主题面板里它是"数据中心/国防上游材料",在这里它是"物理AI最深瓶颈"。<b>这正说明它的强韧——多主题共同上游</b>。若决定建仓,它一个仓位同时押注 AI + 物理AI + 国防三条线。</p>
+  </div>
+
+  <footer>
+    <b>物理AI 决策面板 v1.0</b> · 数据更新至 2026/05/30<br>
+    定性:观察期(WATCHING)。整机商业化远+美股纯玩稀缺,维持监控不买。<br>
+    唯一交叉点稀土磁材(MP/USAR)待进一步研究是否过热。<br>
+    个人研究工具,非投资建议。物理AI主题波动性极高,严守纪律:不追高、买入即挂止损、守能力圈。
+  </footer>
+</div></div>
+</div>
+
+<div id="tabbar">
+  <button data-theme-btn="ai" class="active" onclick="switchTheme('ai')"><span class="ic">📊</span>AI主题</button>
+  <button data-theme-btn="phy" onclick="switchTheme('phy')"><span class="ic">🤖</span>物理AI</button>
 </div>
 
 <script>
-  // tab switching
-  document.querySelectorAll('.tab').forEach(function(t){
-    t.addEventListener('click', function(){
-      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
-      document.querySelectorAll('.panel-view').forEach(function(x){x.classList.remove('active');});
-      t.classList.add('active');
-      document.getElementById(t.dataset.tab).classList.add('active');
-      window.scrollTo({top:0, behavior:'smooth'});
-    });
+function switchTheme(t){
+  document.querySelectorAll('.theme-section').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('sec-'+t).classList.add('active');
+  document.querySelectorAll('#tabbar button').forEach(function(b){b.classList.remove('active');});
+  document.querySelector('#tabbar button[data-theme-btn="'+t+'"]').classList.add('active');
+  document.querySelector('meta[name=theme-color]').setAttribute('content', t==='ai'?'#11171a':'#16130f');
+  document.documentElement.style.background = t==='ai'?'#11171a':'#16130f';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click', function(){
+    var scope = t.closest('.theme-section');
+    scope.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+    scope.querySelectorAll('.panel-view').forEach(function(x){x.classList.remove('active');});
+    t.classList.add('active');
+    var pv = scope.querySelector('#'+t.dataset.tab);
+    if(pv) pv.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
   });
-  // thermometer fill
-  window.addEventListener('load', function(){
-    setTimeout(function(){ document.getElementById('fill').style.height='88%'; }, 300);
-  });
+});
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var f1=document.querySelector('#sec-ai #fill'); if(f1) f1.style.height='88%';
+    var f2=document.querySelector('#phy-scope #phy-fill'); if(f2) f2.style.height='42%';
+  },300);
+});
 </script>
 </body>
 </html>
