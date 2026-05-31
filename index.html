@@ -1,4 +1,56 @@
 <!DOCTYPE html>
+<!--
+================================================================
+  投资决策面板 · 数据区 / DATA BLOCK(整合版:AI主题 + 物理AI)
+  给 Claude Code:这是唯一的数据更新入口。更新时先改这里的记录,
+  再到下方对应 section 同步修改。分析结论由 claude.ai 提供,
+  Code 只负责落地+部署,不自行判断行情或编造股价。
+  结构:页面分两个 section —— #sec-ai(绿,AI主题)/ #sec-phy(琥珀,物理AI)
+       物理AI 的 id 和 data-tab 均带 "phy-" 前缀(如 phy-thermo/phy-fill)
+================================================================
+  更新日期: 2026/05/30
+  主题色: AI #11171a(绿系) / 物理AI #16130f(琥珀系)
+
+  ========== 【A】AI 主题面板 (#sec-ai) ==========
+  温度计状态: 🟢 加速期 (ACCELERATING) · 填充高度 88%
+
+  第一层 需求·四巨头2026 capex:
+    AMZN $200B | GOOGL $185B | MSFT $190B | META $130B | 合计~$725-750B
+  第二层 验证:
+    DELL backlog $513B(+757% AI服务器)
+    NVDA 数据中心 $75.2B(+92%),指引$910亿
+    TSM +30% YTD(4月环比-1.1%,6/10复核)
+    Vera Rubin: Dell XE9812旗舰3.6 exaflops/75TB内存/220kW机架,2026下半年上市;Spectrum-6含1.6T+CPO
+  第三层 情绪:
+    Polymarket泡沫 24% | 10Y 4.50% | FCF收紧
+
+  筛选结果·各标的现价与判读(搜 resp-table):
+    CEG $289 筑底-29% ⭐建仓候选(逼近第一档$285)
+    PLTR $156 反弹突破 已涨过·等回调
+    GLW $196 突破 等回调$170
+    MRVL $203 近高 等回调$175
+    GEV $1070 高位 等深跌
+    RKLB 已清仓($150卖出) 回调重建
+    BE $294 16倍 过热不碰 | MU $900 10倍顶 顶部不碰
+    SNOW $244 RSI94 超买等回调 | DELL — 暴涨 纯监控
+  等待清单入场价:
+    CEG $285/$260 止损$235 目标$340/$380
+    PLTR $125/$115 止损$100 目标$160/$200
+    RKLB 回调重建$110/$95
+  账户状态: 富途已清空, 100%现金, 转IBKR途中
+  财报日历: TSM月营收6/10 | CEG 7/30 | RKLB 8/6 | PLTR 8/10 | NVDA 8/26 | DELL 9/3
+
+  ========== 【B】物理AI 面板 (#sec-phy) ==========
+  温度计状态: 🟡 观察期 (WATCHING) · 填充高度 42% (id=phy-fill)
+  关键前提: 2026/01特斯拉转产Optimus Gen3,目标年产100万台/单台$20K
+  三大瓶颈: 1稀土磁材NdFeB(中国控69%开采+90%加工) 2精密传动(滚柱丝杠>谐波,占执行器30-50%) 3灵巧手(BOM 31%)
+  美股可投: MP Materials(已盈利) | USA Rare Earth(爬坡期)
+  整机: TSLA(占比小) | 大脑: NVDA(Isaac) | 传感器: OUST
+  A股龙头(用户有A股账户可买): 绿的谐波(科创板需权限)/汇川/拓普/双环/兆威/金力永磁等
+  日股: Harmonic Drive(6324)
+  核心结论: 整机商业化2027-2030维持观察;稀土磁材资金效率最高(不靠机器人,EV/风电/国防已有需求)
+================================================================
+-->
 <html lang="zh" data-theme="dark" style="color-scheme:dark;background:#11171a;">
 <head>
 <meta charset="UTF-8">
@@ -12,9 +64,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="决策面板">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Crect width='180' height='180' rx='40' fill='%230a0e0f'/%3E%3Crect x='78' y='34' width='24' height='86' rx='12' fill='%23243033'/%3E%3Crect x='82' y='60' width='16' height='60' fill='%232ee6a0'/%3E%3Ccircle cx='90' cy='128' r='28' fill='%232ee6a0'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Space+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 html { color-scheme:dark only; background:#11171a; forced-color-adjust:none; -webkit-text-size-adjust:100%; }
 html, body, * { forced-color-adjust:none; }
@@ -35,8 +84,8 @@ body { margin:0; }
     --bg: #11171a; --panel: #1a2226; --panel-2: #212b30; --line: #2f3d42;
     --green: #2ee6a0; --green-dim: #1a9c6e; --amber: #ffb838; --red: #ff4d5e;
     --ink: #e8f0ee; --ink-dim: #7d908c; --ink-faint: #4a5856;
-    --mono: 'Space Mono', monospace; --display: 'Archivo','Noto Sans SC',sans-serif;
-    --body: 'Noto Sans SC','Archivo',sans-serif;
+    --mono: ui-monospace,'SF Mono','Menlo','Consolas',monospace; --display: -apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+    --body: -apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -194,8 +243,8 @@ body { margin:0; }
     --bg:#16130f; --panel:#201b15; --panel-2:#28221a; --line:#3f3527;
     --amber:#ffb838; --amber-dim:#b87d1a; --green:#2ee6a0; --red:#ff4d5e; --blue:#5b9dff;
     --ink:#f0ebe2; --ink-dim:#94897a; --ink-faint:#5a5246;
-    --mono:'Space Mono',monospace; --display:'Archivo','Noto Sans SC',sans-serif;
-    --body:'Noto Sans SC','Archivo',sans-serif;
+    --mono:ui-monospace,'SF Mono','Menlo','Consolas',monospace; --display:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+    --body:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
   }#phy-scope{ margin:0; padding:0; box-sizing:border-box; }#phy-scope{
     background:#16130f; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.5;
     background-image: radial-gradient(circle at 15% 8%, rgba(255,184,56,0.05), transparent 40%), radial-gradient(circle at 85% 92%, rgba(91,157,255,0.03), transparent 45%);
@@ -216,7 +265,7 @@ body { margin:0; }
   }
   #tabbar button {
     flex:1; background:none; border:none; padding:12px 4px 10px; cursor:pointer;
-    font-family:'Noto Sans SC',sans-serif; font-size:11px; font-weight:700;
+    font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif; font-size:11px; font-weight:700;
     color:#5a5246; display:flex; flex-direction:column; align-items:center; gap:4px;
     transition:.2s; letter-spacing:.05em;
   }
