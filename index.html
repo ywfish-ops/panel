@@ -112,12 +112,12 @@ body { margin:0; }
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background:#11171a; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.5;
+    background:#11171a; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.6;
     background-image: radial-gradient(circle at 15% 8%, rgba(46,230,160,0.04), transparent 40%), radial-gradient(circle at 85% 92%, rgba(255,184,56,0.03), transparent 45%);
     min-height:100vh; overflow-x:hidden;
   }
   body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:1; background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.012) 0,rgba(255,255,255,0.012) 1px,transparent 1px,transparent 3px); opacity:.5; }
-  .wrap { max-width:1180px; margin:0 auto; padding:0 20px; position:relative; z-index:2; }
+  .wrap { max-width:680px; margin:0 auto; padding:0 20px; position:relative; z-index:2; }
 
   /* header */
   header { padding:44px 0 0; }
@@ -146,14 +146,15 @@ body { margin:0; }
 
   /* verdict (tab1) */
   .verdict { background:var(--panel); border:1px solid var(--line); border-radius:4px; display:grid; grid-template-columns:auto 1fr; overflow:hidden; margin-bottom:30px; }
-  .gauge-cell { padding:30px 36px; border-right:1px solid var(--line); display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(160deg,rgba(255,184,56,0.07),transparent); min-width:230px; }
-  .thermometer { width:54px; height:190px; position:relative; margin:8px 0 18px; }
-  .thermo-tube { position:absolute; left:50%; top:0; transform:translateX(-50%); width:20px; height:158px; background:var(--panel-2); border:2px solid var(--line); border-radius:12px 12px 0 0; overflow:hidden; }
+  .gauge-cell { padding:16px 20px; border-right:1px solid var(--line); display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(160deg,rgba(255,184,56,0.07),transparent); min-width:148px; }
+  .thermometer { width:40px; height:78px; position:relative; margin:2px 0 8px; }
+  .thermo-tube { position:absolute; left:50%; top:0; transform:translateX(-50%); width:16px; height:58px; background:var(--panel-2); border:2px solid var(--line); border-radius:10px 10px 0 0; overflow:hidden; }
   .thermo-fill { position:absolute; bottom:0; left:0; width:100%; background:linear-gradient(0deg,#b87a18,var(--amber)); height:0; transition:height 1.8s cubic-bezier(.2,.8,.2,1); }
-  .thermo-bulb { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:44px; height:44px; border-radius:50%; background:linear-gradient(160deg,var(--amber),#b87a18); border:2px solid var(--line); box-shadow:0 0 24px rgba(255,184,56,.5); }
-  .verdict-status { font-family:var(--display); font-weight:900; font-size:1.7rem; text-transform:uppercase; color:var(--green); text-align:center; }
+  .thermo-bulb { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:30px; height:30px; border-radius:50%; background:linear-gradient(160deg,var(--amber),#b87a18); border:2px solid var(--line); box-shadow:0 0 18px rgba(255,184,56,.5); }
+  .verdict-status { font-family:var(--display); font-weight:900; font-size:1.35rem; text-transform:uppercase; color:var(--green); text-align:center; }
+  .gauge-date { font-family:var(--mono); font-size:10px; color:var(--ink-faint); letter-spacing:.04em; text-align:center; margin-top:6px; }
   .verdict-status small { display:block; font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--ink-dim); font-weight:400; margin-top:6px; }
-  .verdict-body { padding:30px 36px; display:flex; flex-direction:column; justify-content:center; }
+  .verdict-body { padding:20px 22px; display:flex; flex-direction:column; justify-content:center; }
   .verdict-body h2 { font-family:var(--display); font-size:1.05rem; font-weight:800; text-transform:uppercase; margin-bottom:14px; }
   .verdict-body p { color:var(--ink-dim); font-size:14px; margin-bottom:10px; }
   .verdict-body p b { color:var(--green); }
@@ -278,6 +279,60 @@ body { margin:0; }
   }
   .resp-hint { display:none; font-family:var(--mono); font-size:10px; color:var(--ink-faint); margin-bottom:10px; letter-spacing:.05em; }
 
+  /* ===== 排版优化 v1.1(紧凑/折叠/时间线)===== */
+  .tl-conclusion { font-size:14px; color:var(--ink); font-weight:700; margin-bottom:10px; line-height:1.5; }
+  .tl-conclusion b.amber { color:var(--amber); }
+  .mini-bullets { list-style:none; margin:0 0 12px; display:flex; flex-direction:column; gap:5px; }
+  .mini-bullets li { font-size:12.5px; color:var(--ink-dim); padding-left:15px; position:relative; line-height:1.5; }
+  .mini-bullets li::before { content:"·"; position:absolute; left:4px; color:var(--ink-faint); font-weight:900; }
+  .mini-bullets li b { color:var(--ink); }
+  .act-chips { display:flex; flex-direction:column; gap:8px; margin:2px 0 12px; }
+  .act-row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  .act-label { font-family:var(--mono); font-size:11px; font-weight:700; margin-right:2px; }
+  .act-row.allow .act-label { color:var(--green); }
+  .act-row.deny .act-label { color:var(--red); }
+  .act-chip { font-size:11.5px; padding:4px 9px; border-radius:3px; border:1px solid var(--line); white-space:nowrap; }
+  .act-row.allow .act-chip { background:rgba(46,230,160,.1); color:var(--green); border-color:rgba(46,230,160,.3); }
+  .act-row.deny .act-chip { background:rgba(255,77,94,.1); color:var(--red); border-color:rgba(255,77,94,.3); }
+  details.fold { margin:8px 0; border:1px solid var(--line); border-radius:4px; background:var(--panel-2); }
+  details.fold > summary { cursor:pointer; padding:10px 14px; font-family:var(--mono); font-size:11px; letter-spacing:.05em; color:var(--ink-dim); list-style:none; user-select:none; }
+  details.fold > summary::-webkit-details-marker { display:none; }
+  details.fold > summary::before { content:"▸ "; color:var(--ink-faint); }
+  details.fold[open] > summary::before { content:"▾ "; }
+  details.fold > div { padding:0 14px 12px; font-size:12.5px; color:var(--ink-dim); line-height:1.6; }
+  details.fold > div b { color:var(--ink); }
+  .formula { font-family:var(--mono); font-size:12px; color:var(--ink-dim); background:var(--bg); border:1px solid var(--line); border-radius:4px; padding:10px 13px; margin:2px 0 4px; line-height:1.7; }
+  .formula b.a { color:var(--amber); }
+  /* 三维卡片关键证据 + 详情折叠 */
+  .dim-key { font-size:12px; color:var(--ink-dim); margin-top:8px; line-height:1.45; }
+  .dim-key b { color:var(--ink); }
+  details.dim-more { margin-top:7px; }
+  details.dim-more > summary { cursor:pointer; font-family:var(--mono); font-size:10.5px; color:var(--ink-faint); list-style:none; user-select:none; }
+  details.dim-more > summary::-webkit-details-marker { display:none; }
+  details.dim-more > summary::before { content:"▸ 展开证据/观察哨"; }
+  details.dim-more[open] > summary::before { content:"▾ 收起"; }
+  details.dim-more .dim-note { border-top:1px dashed var(--line); padding-top:8px; margin-top:6px; }
+  /* 事件墙 timeline */
+  .tl { display:flex; flex-direction:column; }
+  .tl-item { display:flex; gap:12px; padding:7px 0; border-bottom:1px solid var(--line); }
+  .tl-item:last-child { border-bottom:none; }
+  .tl-date { flex:0 0 38px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); padding-top:1px; }
+  .tl-body { flex:1; min-width:0; color:var(--ink-dim); font-size:12.5px; line-height:1.5; }
+  .tl-body::before { font-family:var(--mono); margin-right:6px; }
+  .tl-item.warn .tl-body::before { content:"⚠"; color:var(--amber); }
+  .tl-item.bad .tl-body::before { content:"✕"; color:var(--red); }
+  .tl-item.good .tl-body::before { content:"✓"; color:var(--green); }
+  .tl-body b { color:var(--ink); }
+  /* capex 紧凑表 */
+  .capex-tbl { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:4px; }
+  .capex-tbl td { padding:8px 8px; border-bottom:1px solid var(--line); vertical-align:baseline; }
+  .capex-tbl tr:last-child td { border-bottom:none; }
+  .capex-tbl .cx-co { font-family:var(--mono); font-weight:700; color:var(--ink); white-space:nowrap; }
+  .capex-tbl .cx-val { font-family:var(--display); font-weight:900; font-size:1.1rem; text-align:right; letter-spacing:-.02em; white-space:nowrap; }
+  .capex-tbl .cx-val span { font-size:.65rem; color:var(--ink-dim); }
+  .capex-tbl .cx-yoy { color:var(--green); font-family:var(--mono); font-size:11.5px; text-align:right; white-space:nowrap; }
+  .capex-tbl .cx-note { color:var(--ink-faint); font-size:11px; line-height:1.4; }
+
 
 /* ===== 物理AI样式(作用域隔离 #phy-scope)===== */
 #phy-scope{ color-scheme:dark only; background:#16130f; forced-color-adjust:none; -webkit-text-size-adjust:100%; }#phy-scope, #phy-scope, #phy-scope{ forced-color-adjust:none; }#phy-scope{
@@ -290,7 +345,7 @@ body { margin:0; }
     background:#16130f; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.5;
     background-image: radial-gradient(circle at 15% 8%, rgba(255,184,56,0.05), transparent 40%), radial-gradient(circle at 85% 92%, rgba(91,157,255,0.03), transparent 45%);
     min-height:100vh; overflow-x:hidden;
-  }#phy-scope body::before{ content:""; position:fixed; inset:0; pointer-events:none; z-index:1; background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.01) 0,rgba(255,255,255,0.01) 1px,transparent 1px,transparent 3px); opacity:.5; }#phy-scope .wrap{ max-width:1180px; margin:0 auto; padding:0 20px; position:relative; z-index:2; }#phy-scope header{ padding:44px 0 0; }@supports (padding: env(safe-area-inset-top)){#phy-scope header{ padding-top: calc(4px + env(safe-area-inset-top)); }#phy-scope{ padding-bottom: env(safe-area-inset-bottom); }}#phy-scope .kicker{ font-family:var(--mono); font-size:11px; letter-spacing:.35em; color:var(--amber); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:10px; }#phy-scope .kicker .dot{ width:8px; height:8px; border-radius:50%; background:var(--amber); box-shadow:0 0 10px var(--amber); animation:pulse 2.4s infinite; }@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }#phy-scope h1{ font-family:var(--display); font-weight:900; font-size:clamp(2.2rem,6vw,4rem); line-height:.95; letter-spacing:-.03em; text-transform:uppercase; }#phy-scope h1 .hl{ color:var(--amber); }#phy-scope .sub{ margin-top:14px; max-width:680px; color:var(--ink-dim); font-size:14px; }#phy-scope .sub b{ color:var(--ink); }#phy-scope .updated{ margin-top:14px; font-family:var(--mono); font-size:12px; color:var(--ink-faint); }#phy-scope .xlink{ margin-top:10px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); }#phy-scope .xlink b{ color:var(--amber-dim); }#phy-scope .tabs{ display:flex; gap:2px; margin:26px 0 0; border-bottom:1px solid var(--line); }#phy-scope .tab{ flex:1 1 0; min-width:0; font-family:var(--display); font-weight:800; font-size:.82rem; text-transform:uppercase; color:var(--ink-faint); background:none; border:none; padding:13px 4px; cursor:pointer; border-bottom:2px solid transparent; transition:.2s; white-space:nowrap; text-align:center; }#phy-scope .tab.active{ color:var(--amber); border-bottom-color:var(--amber); }#phy-scope .panel-view{ display:none; padding:30px 0 0; animation:fade .4s; }#phy-scope .panel-view.active{ display:block; }@keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }#phy-scope /* verdict */
+  }#phy-scope body::before{ content:""; position:fixed; inset:0; pointer-events:none; z-index:1; background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.01) 0,rgba(255,255,255,0.01) 1px,transparent 1px,transparent 3px); opacity:.5; }#phy-scope .wrap{ max-width:680px; margin:0 auto; padding:0 20px; position:relative; z-index:2; }#phy-scope header{ padding:44px 0 0; }@supports (padding: env(safe-area-inset-top)){#phy-scope header{ padding-top: calc(4px + env(safe-area-inset-top)); }#phy-scope{ padding-bottom: env(safe-area-inset-bottom); }}#phy-scope .kicker{ font-family:var(--mono); font-size:11px; letter-spacing:.35em; color:var(--amber); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:10px; }#phy-scope .kicker .dot{ width:8px; height:8px; border-radius:50%; background:var(--amber); box-shadow:0 0 10px var(--amber); animation:pulse 2.4s infinite; }@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }#phy-scope h1{ font-family:var(--display); font-weight:900; font-size:clamp(2.2rem,6vw,4rem); line-height:.95; letter-spacing:-.03em; text-transform:uppercase; }#phy-scope h1 .hl{ color:var(--amber); }#phy-scope .sub{ margin-top:14px; max-width:680px; color:var(--ink-dim); font-size:14px; }#phy-scope .sub b{ color:var(--ink); }#phy-scope .updated{ margin-top:14px; font-family:var(--mono); font-size:12px; color:var(--ink-faint); }#phy-scope .xlink{ margin-top:10px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); }#phy-scope .xlink b{ color:var(--amber-dim); }#phy-scope .tabs{ display:flex; gap:2px; margin:26px 0 0; border-bottom:1px solid var(--line); }#phy-scope .tab{ flex:1 1 0; min-width:0; font-family:var(--display); font-weight:800; font-size:.82rem; text-transform:uppercase; color:var(--ink-faint); background:none; border:none; padding:13px 4px; cursor:pointer; border-bottom:2px solid transparent; transition:.2s; white-space:nowrap; text-align:center; }#phy-scope .tab.active{ color:var(--amber); border-bottom-color:var(--amber); }#phy-scope .panel-view{ display:none; padding:30px 0 0; animation:fade .4s; }#phy-scope .panel-view.active{ display:block; }@keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }#phy-scope /* verdict */
   .verdict{ background:var(--panel); border:1px solid var(--line); border-radius:4px; display:grid; grid-template-columns:auto 1fr; overflow:hidden; margin-bottom:28px; }#phy-scope .gauge-cell{ padding:30px 30px; border-right:1px solid var(--line); display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(160deg,rgba(255,184,56,0.06),transparent); min-width:220px; }#phy-scope .thermometer{ width:54px; height:180px; position:relative; margin:8px 0 18px; }#phy-scope .thermo-tube{ position:absolute; left:50%; top:0; transform:translateX(-50%); width:20px; height:148px; background:var(--panel-2); border:2px solid var(--line); border-radius:12px 12px 0 0; overflow:hidden; }#phy-scope .thermo-fill{ position:absolute; bottom:0; left:0; width:100%; background:linear-gradient(0deg,var(--amber-dim),var(--amber)); height:0; transition:height 1.8s cubic-bezier(.2,.8,.2,1); }#phy-scope .thermo-bulb{ position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:44px; height:44px; border-radius:50%; background:linear-gradient(160deg,var(--amber),var(--amber-dim)); border:2px solid var(--line); box-shadow:0 0 24px rgba(255,184,56,.45); }#phy-scope .verdict-status{ font-family:var(--display); font-weight:900; font-size:1.6rem; text-transform:uppercase; color:var(--amber); text-align:center; }#phy-scope .verdict-status small{ display:block; font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--ink-dim); font-weight:400; margin-top:6px; }#phy-scope .verdict-body{ padding:28px 30px; display:flex; flex-direction:column; justify-content:center; }#phy-scope .verdict-body h2{ font-family:var(--display); font-size:1.05rem; font-weight:800; text-transform:uppercase; margin-bottom:14px; }#phy-scope .verdict-body p{ color:var(--ink-dim); font-size:14px; margin-bottom:10px; }#phy-scope .verdict-body p b{ color:var(--amber); }#phy-scope .scale{ margin-top:14px; display:flex; border-radius:3px; overflow:hidden; border:1px solid var(--line); }#phy-scope .scale div{ flex:1; padding:8px 6px; text-align:center; font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--ink-faint); text-transform:uppercase; }#phy-scope .scale .s-on{ background:rgba(255,184,56,.15); color:var(--amber); border-bottom:2px solid var(--amber); font-weight:700; }#phy-scope .premise{ background:var(--panel-2); border:1px dashed var(--line); border-radius:4px; padding:18px 22px; margin-bottom:28px; }#phy-scope .premise h4{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--amber-dim); text-transform:uppercase; margin-bottom:10px; }#phy-scope .premise p{ font-size:13.5px; color:var(--ink-dim); }#phy-scope .premise p b{ color:var(--ink); }#phy-scope .layer{ margin:34px 0; }#phy-scope .layer-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:4px; }#phy-scope .layer-num{ font-family:var(--mono); font-size:13px; color:var(--bg); background:var(--red); padding:2px 10px; border-radius:2px; font-weight:700; }#phy-scope .layer-head.b2 .layer-num{background:var(--amber);}#phy-scope .layer-head.b3 .layer-num{background:var(--amber-dim);}#phy-scope .layer-title{ font-family:var(--display); font-size:1.4rem; font-weight:800; text-transform:uppercase; }#phy-scope .layer-tag{ margin-left:auto; font-family:var(--mono); font-size:10px; color:var(--red); border:1px solid var(--line); padding:3px 9px; border-radius:2px; }#phy-scope .layer-desc{ color:var(--ink-faint); font-size:12px; margin:6px 0 18px; font-family:var(--mono); }#phy-scope .grid{ display:grid; gap:13px; }#phy-scope .grid-3{ grid-template-columns:repeat(3,1fr); }#phy-scope .card{ background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:18px; position:relative; overflow:hidden; transition:.25s; }#phy-scope .card:hover{ transform:translateY(-3px); border-color:var(--amber-dim); }#phy-scope .card::after{ content:""; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--ink-faint); }#phy-scope .card.investable::after{ background:var(--green); }#phy-scope .card.partial::after{ background:var(--amber); }#phy-scope .card.noaccess::after{ background:var(--red); }#phy-scope .card.oversea::after{ background:var(--blue); }#phy-scope .card.unlisted::after{ background:var(--ink-faint); }#phy-scope .card-ticker{ font-family:var(--mono); font-size:12px; color:var(--ink-dim); letter-spacing:.1em; display:flex; justify-content:space-between; align-items:center; }#phy-scope .card-name{ font-size:12px; color:var(--ink-faint); margin-top:2px; min-height:16px; }#phy-scope .card-val{ font-family:var(--display); font-weight:900; font-size:1.5rem; margin:10px 0 2px; letter-spacing:-.02em; }#phy-scope .card-tag{ font-family:var(--mono); font-size:10px; font-weight:700; padding:2px 7px; border-radius:2px; display:inline-block; margin-top:4px; }#phy-scope .tag-inv{ background:rgba(46,230,160,.15); color:var(--green); }#phy-scope .tag-par{ background:rgba(255,184,56,.12); color:var(--amber); }#phy-scope .tag-no{ background:rgba(255,77,94,.12); color:var(--red); }#phy-scope .tag-os{ background:rgba(91,157,255,.12); color:var(--blue); }#phy-scope .tag-un{ background:rgba(90,82,70,.3); color:var(--ink-faint); }#phy-scope .card-note{ font-size:11px; color:var(--ink-faint); margin-top:9px; line-height:1.4; border-top:1px solid var(--line); padding-top:9px; }#phy-scope .bottleneck{ display:flex; flex-direction:column; gap:10px; }#phy-scope .bn{ background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:18px 22px; display:flex; align-items:flex-start; gap:18px; }#phy-scope .bn-depth{ font-family:var(--display); font-weight:900; font-size:1.4rem; min-width:60px; }#phy-scope .bn.d1 .bn-depth{color:var(--red);}#phy-scope .bn.d2 .bn-depth{color:var(--amber);}#phy-scope .bn.d3 .bn-depth{color:var(--amber-dim);}#phy-scope .bn-body h3{ font-family:var(--display); font-size:1.05rem; font-weight:800; margin-bottom:4px; }#phy-scope .bn-body p{ font-size:13px; color:var(--ink-dim); }#phy-scope .bn-body p b{ color:var(--ink); }#phy-scope .bn-deep{ margin-left:auto; font-family:var(--mono); font-size:9px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.1em; white-space:nowrap; }#phy-scope .signal{ margin-top:18px; background:var(--panel-2); border:1px dashed var(--line); border-radius:4px; padding:16px 20px; }#phy-scope .signal h4{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--ink-dim); text-transform:uppercase; margin-bottom:10px; }#phy-scope .signal ul{ list-style:none; }#phy-scope .signal li{ font-size:13px; color:var(--ink-dim); padding:5px 0 5px 22px; position:relative; }#phy-scope .signal li::before{ position:absolute; left:0; top:5px; font-family:var(--mono); }#phy-scope .signal li.good::before{content:"✓"; color:var(--green);}#phy-scope .signal li.warn::before{content:"⚠"; color:var(--amber);}#phy-scope .signal li.bad::before{content:"✕"; color:var(--red);}#phy-scope .signal li.star::before{content:"★"; color:var(--amber);}#phy-scope .signal li b{ color:var(--ink); }#phy-scope .cross{ background:linear-gradient(135deg,rgba(255,184,56,0.08),rgba(46,230,160,0.05)); border:1px solid var(--amber-dim); border-radius:4px; padding:24px; margin:28px 0; }#phy-scope .cross h3{ font-family:var(--display); font-size:1.2rem; font-weight:900; text-transform:uppercase; color:var(--amber); margin-bottom:12px; }#phy-scope .cross p{ font-size:13.5px; color:var(--ink-dim); margin-bottom:8px; }#phy-scope .cross p b{ color:var(--ink); }#phy-scope .cross-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px; }#phy-scope .cross-cell{ background:var(--panel); border:1px solid var(--line); border-radius:3px; padding:10px; text-align:center; }#phy-scope .cross-cell .k{ font-family:var(--mono); font-size:9px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; }#phy-scope .cross-cell .v{ font-size:12px; color:var(--green); font-weight:700; margin-top:4px; }#phy-scope .section-rule{ font-family:var(--mono); font-size:11px; letter-spacing:.3em; color:var(--ink-faint); text-transform:uppercase; margin:34px 0 20px; display:flex; align-items:center; gap:14px; }#phy-scope .section-rule::after{ content:""; flex:1; height:1px; background:var(--line); }#phy-scope footer{ border-top:1px solid var(--line); margin-top:38px; padding:26px 0 50px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); line-height:1.8; }#phy-scope footer b{ color:var(--ink-dim); }@media (max-width:900px){#phy-scope .grid-3{grid-template-columns:repeat(2,1fr);}#phy-scope .verdict{grid-template-columns:1fr;}#phy-scope .gauge-cell{border-right:none; border-bottom:1px solid var(--line);}#phy-scope .cross-grid{grid-template-columns:repeat(2,1fr);}}@media (max-width:560px){#phy-scope .grid-3{grid-template-columns:1fr;}#phy-scope .bn{flex-wrap:wrap; gap:10px;}#phy-scope .bn-deep{margin-left:0;}}
   /* ===== 整合外层:底部TabBar ===== */
   body { padding-bottom:72px !important; }
@@ -346,36 +401,46 @@ body { margin:0; }
           <div class="thermo-bulb"></div>
         </div>
         <div class="verdict-status" style="color:var(--amber);">过热<small>OVERHEATED</small></div>
+        <div class="gauge-date">维持 · 数据 6/11 盘后</div>
       </div>
       <div class="verdict-body">
-        <h2>主题总开关 · 三维合成 · 2026年6月</h2>
-        <p>需求仍<b style="color:var(--green)">强</b>(capex ~$725–750B、TSM 5月+30.1%、ORCL RPO $6380亿/+363%),拥挤度<b style="color:var(--amber)">部分缓解</b>(高beta两周-25~-40%、抛物线断裂),但资金<b style="color:var(--red)">恶化</b>(SMCI/ORCL集体增发融资、定价转向"资本纪律")。资金恶化与拥挤缓解对冲、需求仍强 → 合成 = <b style="color:var(--amber)">过热档(维持)</b>。</p>
-        <p style="color:var(--ink-faint); font-size:13px;">用法:温度计是<b>环境刻度,不是买卖信号</b>——它调整你的贪婪/警惕程度与进场标准松紧,不替你选股。当前🟠过热=只减不加、收紧止盈、提高进场标准、等回调,呼应"SPCX IPO前先观察、防抽水"。<br>核心警示:最危险的组合是"需求仍热但拥挤已极端"——若四巨头任一capex下修 + 资金明确撤离,升级🔴见顶警报,转防御/持现金。</p>
-        <div class="scale">
+        <h2>主题总开关 · 三维合成 · 2026/06</h2>
+        <div class="tl-conclusion">🟠 <b class="amber">过热档(维持)</b> · 新仓仅限观察仓、条件触发制</div>
+        <ul class="mini-bullets">
+          <li>需求<b>仍强</b>:capex~$725–750B、ORCL RPO+363%</li>
+          <li>拥挤<b>部分缓解</b>:高beta两周-25~-40%</li>
+          <li>资金<b>恶化</b>:巨头集体增发、转"资本纪律"</li>
+          <li>对冲后<b>维持过热</b>,距🔴见顶仅一步</li>
+        </ul>
+        <div class="act-chips">
+          <div class="act-row allow"><span class="act-label">✅ 允许</span><span class="act-chip">观察仓</span><span class="act-chip">收割止盈</span><span class="act-chip">提高入场标准</span><span class="act-chip">等回调</span></div>
+          <div class="act-row deny"><span class="act-label">❌ 禁止</span><span class="act-chip">新建标准仓</span><span class="act-chip">追高</span></div>
+        </div>
+        <div class="formula">🟢需求 8×40% + 🟡拥挤 6×35% + 🔴资金 3×25% → <b class="a">🟠 过热 61%</b></div>
+        <details class="fold"><summary>用法 / 核心警示</summary><div><b>用法:</b>温度计是环境刻度,不是买卖信号——它调整你的贪婪/警惕程度与进场标准松紧,不替你选股。当前🟠过热=只减不加、收紧止盈、提高进场标准、等回调,呼应"SPCX IPO前先观察、防抽水"。<br><br><b>核心警示:</b>最危险的组合是"需求仍热但拥挤已极端"——若四巨头任一capex下修 + 资金明确撤离,升级🔴见顶警报,转防御/持现金。</div></details>
+        <div class="scale" style="margin-top:12px;">
           <div class="s-green">🟢 冷/温 可积极</div><div class="s-amber">🟠 偏热/过热 警惕</div><div class="s-red">🔴 见顶 防御</div>
         </div>
 
-        <!-- 三维度明细 -->
+        <!-- 三维度明细(关键证据 + 折叠详情) -->
         <div class="dims">
           <div class="dim">
             <div class="dim-head"><span class="dim-name">① 需求热度<span class="w">权重40% · 最硬</span></span><span class="dim-read r-green">🟢 强 8/10</span></div>
             <div class="dim-bar"><div class="dim-bar-fill f-green" data-w="80"></div></div>
-            <div class="dim-note">四巨头2026 capex ~<b>$725–750B</b>(+67~77%);<b>6/11</b>:TSM 5月营收+30.1%(4月+17.5%为高基数噪音)、ORCL RPO <b>$6380亿</b>(+363%,FY27指引$900亿)、AXTI InP积压>$1亿。<b>加速、无下修信号</b>。⚠️观察哨:任一hyperscaler下修capex/推迟DC = 立即降级。</div>
+            <div class="dim-key">capex ~<b>$725–750B</b>(+67~77%),加速无下修</div>
+            <details class="dim-more"><summary></summary><div class="dim-note"><b>6/11</b>:TSM 5月营收+30.1%(4月+17.5%为高基数噪音)、ORCL RPO <b>$6380亿</b>(+363%,FY27指引$900亿)、AXTI InP积压>$1亿。⚠️观察哨:任一hyperscaler下修capex/推迟DC = 立即降级。</div></details>
           </div>
           <div class="dim">
             <div class="dim-head"><span class="dim-name">② 拥挤度<span class="w">权重35% · 反转风险</span></span><span class="dim-read r-amber">🟡 缓解 6/10</span></div>
             <div class="dim-bar"><div class="dim-bar-fill f-amber" data-w="62"></div></div>
-            <div class="dim-note">高beta两周<b>-25~-40%</b>(TSEM/NOK/AXTI/VRT抛物线断裂)→ 泡沫部分挤出;但6/11超跌股领涨(MRVL+11.1%/TSEM+10.6%)为<b>空头回补</b>、新多头未确认;目标价被现价追平(AXTI $88 vs 目标$73-93)。<b>部分缓解但未消除</b>。</div>
+            <div class="dim-key">高beta两周<b>-25~-40%</b>,泡沫部分挤出</div>
+            <details class="dim-more"><summary></summary><div class="dim-note">6/11超跌股领涨(MRVL+11.1%/TSEM+10.6%)为<b>空头回补</b>、新多头未确认;目标价被现价追平(AXTI $88 vs 目标$73-93)。<b>部分缓解但未消除</b>。</div></details>
           </div>
           <div class="dim">
             <div class="dim-head"><span class="dim-name">③ 资金动向<span class="w">权重25% · 确认/否决</span></span><span class="dim-read r-red">🔴 恶化 3/10</span></div>
             <div class="dim-bar"><div class="dim-bar-fill f-red" data-w="30"></div></div>
-            <div class="dim-note"><b>巨头集体要钱</b>:SMCI增发$70亿、ORCL FY26 FCF -$237亿+拟再融资~$400亿(财报后-10%);定价范式从"需求叙事"→<b>"资本纪律"</b>。利率互换定价2026加息一次、PPI同比6.5%(2022/11最高)、布油$93。<b>本周降级红色</b>。</div>
-          </div>
-          <div class="dim-logic">
-            合成逻辑:需求🟢强 + 拥挤🟡缓解 + 资金🔴恶化 = 🟠过热(维持)。<b>资金恶化与拥挤缓解互相对冲,需求仍强</b> → 总开关不变:新仓仅限观察仓、条件触发制。<br>
-            资金动向是确认/否决角色:需求热+拥挤高时资金还在进→还能撑;资金开始撤→见顶概率大增(当前已恶化)。<br>
-            距🔴一步:需求转顶(capex下修)+ 资金明确撤离 → 升级见顶警报。
+            <div class="dim-key">巨头集体增发,转<b>"资本纪律"</b></div>
+            <details class="dim-more"><summary></summary><div class="dim-note">SMCI增发$70亿、ORCL FY26 FCF -$237亿+拟再融资~$400亿(财报后-10%);利率互换定价2026加息一次、PPI同比6.5%(2022/11最高)、布油$93。<b>本周降级红色</b>。</div></details>
           </div>
         </div>
       </div>
@@ -384,27 +449,25 @@ body { margin:0; }
     <!-- 本周事件墙 + 卖铲子脚注(6/11新增) -->
     <div class="signal" style="margin-bottom:14px;">
       <h4>📅 本周事件墙 · 截至 2026/06/11</h4>
-      <ul>
-        <li class="warn">6/09 SemiAnalysis:CPO量产→2028-29、800VDC→2028;点名 +APH/VRT/Legrand、-LITE/HIMX/NVTS/WOLF;可插拔生命周期延长1-2年、铜替代压力推后</li>
-        <li class="warn">6/10 CPI温和(同比4.2%/核心环比0.2%)但被美伊升级+SMCI增发打翻,收全天最低</li>
-        <li class="bad">6/10盘后 ORCL悖论:RPO史上最强 vs 融资依赖,-10%</li>
-        <li class="good">6/11 PPI同比6.5%爆表但全场低开收高收最高 → 抛压衰竭信号;两日反转结构成立</li>
-        <li class="warn">6/12待更新:SPCX上市(太空板块重定价事件)</li>
-      </ul>
+      <div class="tl">
+        <div class="tl-item warn"><span class="tl-date">6/09</span><span class="tl-body">SemiAnalysis:CPO量产→2028-29、800VDC→2028;<b>+APH/VRT/Legrand</b>、-LITE/HIMX/NVTS/WOLF;可插拔生命周期延长1-2年</span></div>
+        <div class="tl-item warn"><span class="tl-date">6/10</span><span class="tl-body">CPI温和(4.2%/核心+0.2%)被美伊升级+SMCI增发打翻,收全天最低</span></div>
+        <div class="tl-item bad"><span class="tl-date">6/10</span><span class="tl-body">盘后 ORCL悖论:RPO史上最强 vs 融资依赖,<b>-10%</b></span></div>
+        <div class="tl-item good"><span class="tl-date">6/11</span><span class="tl-body">PPI同比6.5%爆表却低开收高收最高 → 抛压衰竭,<b>两日反转成立</b></span></div>
+        <div class="tl-item warn"><span class="tl-date">6/12</span><span class="tl-body">待更新:SPCX上市(太空板块重定价事件)</span></div>
+      </div>
     </div>
-    <div class="dim-logic" style="margin:0 0 30px;">
-      <b>卖铲子不对称注记:</b>capex超支对 hyperscaler 股东是负担,对供应商是订单(ORCL FY27 $700亿 capex → 光纤/电源/内存);短期泥沙俱下,中期 Layer 1 逻辑加固——但受「观察哨」条件约束。
-    </div>
+    <details class="fold" style="margin:0 0 30px;"><summary>卖铲子不对称注记</summary><div>capex超支对 hyperscaler 股东是负担,对供应商是订单(ORCL FY27 $700亿 capex → 光纤/电源/内存);短期泥沙俱下,中期 Layer 1 逻辑加固——但受「观察哨」条件约束。</div></details>
 
     <div class="layer">
       <div class="layer-head l1"><span class="layer-num">01</span><span class="layer-title">需求源头</span></div>
       <div class="layer-desc">// 谁在花钱 — 最上游的水龙头</div>
-      <div class="grid grid-4">
-        <div class="card up"><div class="card-ticker">AMZN <span>▲</span></div><div class="card-name">Amazon / AWS</div><div class="card-val">$200<span>B</span></div><div class="card-delta up">2025 $125B → +60%</div><div class="card-note">四巨头最激进;Q1单季$44.2B</div></div>
-        <div class="card up"><div class="card-ticker">GOOGL <span>▲</span></div><div class="card-name">Alphabet</div><div class="card-val">$185<span>B</span></div><div class="card-delta up">2025 $91B → +100%+</div><div class="card-note">云backlog翻倍至$460B</div></div>
-        <div class="card up"><div class="card-ticker">MSFT <span>▲</span></div><div class="card-name">Microsoft</div><div class="card-val">$190<span>B</span></div><div class="card-delta up">远超$152B共识</div><div class="card-note">$25B来自内存/部件涨价</div></div>
-        <div class="card up"><div class="card-ticker">META <span>▲</span></div><div class="card-name">Meta</div><div class="card-val">$130<span>B</span></div><div class="card-delta up">2025 $72B → +80%</div><div class="card-note">曾因上调capex单日跌9%</div></div>
-      </div>
+      <table class="capex-tbl">
+        <tr><td class="cx-co">AMZN</td><td class="cx-val">$200<span>B</span></td><td class="cx-yoy">+60%</td><td class="cx-note">四巨头最激进 · Q1单季$44.2B</td></tr>
+        <tr><td class="cx-co">GOOGL</td><td class="cx-val">$185<span>B</span></td><td class="cx-yoy">+100%+</td><td class="cx-note">云backlog翻倍至$460B</td></tr>
+        <tr><td class="cx-co">MSFT</td><td class="cx-val">$190<span>B</span></td><td class="cx-yoy">超共识</td><td class="cx-note">远超$152B共识 · $25B来自内存/部件涨价</td></tr>
+        <tr><td class="cx-co">META</td><td class="cx-val">$130<span>B</span></td><td class="cx-yoy">+80%</td><td class="cx-note">曾因上调capex单日跌9%</td></tr>
+      </table>
       <div class="signal"><h4>合计 2026 capex ~$725–750B · 同比 +67~77% · 连续第三年增速 &gt;60%</h4>
         <ul><li class="warn">任一家<b>下调指引</b> = 第一个降温信号</li><li class="warn">Meta上调反跌9% = 市场开始质疑<b>"花钱效率"</b></li></ul>
       </div>
