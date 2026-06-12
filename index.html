@@ -332,6 +332,7 @@ body { margin:0; }
   .capex-tbl .cx-val span { font-size:.65rem; color:var(--ink-dim); }
   .capex-tbl .cx-yoy { color:var(--green); font-family:var(--mono); font-size:11.5px; text-align:right; white-space:nowrap; }
   .capex-tbl .cx-note { color:var(--ink-faint); font-size:11px; line-height:1.4; }
+  .capex-tbl.amber .cx-yoy { color:var(--amber); }
 
 
 /* ===== 物理AI样式(作用域隔离 #phy-scope)===== */
@@ -476,11 +477,11 @@ body { margin:0; }
     <div class="layer">
       <div class="layer-head l2"><span class="layer-num">02</span><span class="layer-title">中转验证</span></div>
       <div class="layer-desc">// 钱真花出去了吗 — backlog 比口头指引更硬</div>
-      <div class="grid grid-3">
-        <div class="card up"><div class="card-ticker">DELL <span>▲</span></div><div class="card-name">AI服务器 Q1FY27</div><div class="card-val">$513<span>B backlog</span></div><div class="card-delta up">AI服务器收入 +757%</div><div class="card-note">5/28:收入+88%,指引上调+$27B</div></div>
-        <div class="card up"><div class="card-ticker">NVDA <span>▲</span></div><div class="card-name">GPU·数据中心 Q1FY27</div><div class="card-val">$75.2<span>B DC</span></div><div class="card-delta up">数据中心 +92% YoY</div><div class="card-note">网络收入+199%(直接验证光通信);指引$910亿</div></div>
-        <div class="card up"><div class="card-ticker">TSM <span>▲</span></div><div class="card-name">代工·4月营收</div><div class="card-val">+30<span>% YTD</span></div><div class="card-delta up">累计同比+29.9%</div><div class="card-note">4月环比-1.1%(季节性);HPC/AI占61%</div></div>
-      </div>
+      <table class="capex-tbl">
+        <tr><td class="cx-co">DELL</td><td class="cx-val">$513<span>B</span></td><td class="cx-yoy">+757%</td><td class="cx-note">AI服务器backlog · 5/28收入+88%、指引上调+$27B</td></tr>
+        <tr><td class="cx-co">NVDA</td><td class="cx-val">$75.2<span>B DC</span></td><td class="cx-yoy">+92%</td><td class="cx-note">数据中心YoY · 网络+199%验证光通信;指引$910亿</td></tr>
+        <tr><td class="cx-co">TSM</td><td class="cx-val">+30<span>% YTD</span></td><td class="cx-yoy">累计+29.9%</td><td class="cx-note">4月环比-1.1%(季节性);HPC/AI占61%</td></tr>
+      </table>
       <div class="signal"><h4>backlog = capex真实落地的硬证据</h4>
         <ul>
           <li class="good">Dell $513B + NVDA DC+92% + TSM+30% = 需求<b>真实且加速</b></li>
@@ -495,11 +496,11 @@ body { margin:0; }
     <div class="layer">
       <div class="layer-head l3"><span class="layer-num">03</span><span class="layer-title">泡沫情绪</span></div>
       <div class="layer-desc">// 反向指标 — 人人说没风险时反而要警惕</div>
-      <div class="grid grid-3">
-        <div class="card flat"><div class="card-ticker">POLYMARKET <span>◆</span></div><div class="card-name">"AI泡沫2026破裂"</div><div class="card-val">24<span>%</span></div><div class="card-delta flat">3月16% → 5月24%</div><div class="card-note">仍属低位,但已抬头</div></div>
-        <div class="card flat"><div class="card-ticker">US10Y <span>▼</span></div><div class="card-name">10年期国债收益率</div><div class="card-val">4.50<span>%</span></div><div class="card-delta flat">从5/20高点4.7%回落</div><div class="card-note">伊朗停火+油价跌,加息概率57%→50%</div></div>
-        <div class="card flat"><div class="card-ticker">FCF <span>◆</span></div><div class="card-name">自由现金流压力</div><div class="card-val">收紧<span></span></div><div class="card-delta flat">Amazon FCF或转负</div><div class="card-note">capex占营收比历史罕见</div></div>
-      </div>
+      <table class="capex-tbl amber">
+        <tr><td class="cx-co">POLYMARKET</td><td class="cx-val">24<span>%</span></td><td class="cx-yoy">3月16%→24%</td><td class="cx-note">"AI泡沫2026破裂"赔率 · 仍低位但已抬头</td></tr>
+        <tr><td class="cx-co">US10Y</td><td class="cx-val">4.50<span>%</span></td><td class="cx-yoy">↓5/20高4.7%</td><td class="cx-note">伊朗停火+油价跌,加息概率57%→50%</td></tr>
+        <tr><td class="cx-co">FCF</td><td class="cx-val">收紧</td><td class="cx-yoy">压力↑</td><td class="cx-note">Amazon FCF或转负;capex占营收比历史罕见</td></tr>
+      </table>
       <div class="signal"><h4>反向解读 — 情绪越乐观越接近风险累积区</h4>
         <ul><li class="warn">所有人都说"没泡沫" = 该警惕</li><li class="bad">"OpenAI/某大模型未达目标"类新闻 = <b>需求端裂缝</b></li></ul>
       </div>
